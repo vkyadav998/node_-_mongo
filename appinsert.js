@@ -22,8 +22,9 @@ MongoClient.connect(url, function (err, db) {
     var collection = db.collection('users');
     
   
-   for(var i = 1; i <= 25; i++){
-    var user = {x: i};
+   for(var i =0; i <= 4; i++){
+	   for(var j=0 ; j<=4;j++){
+    var user = {x: i,name:"vipin"+j};
     console.log(user);
  // Insert some users
     collection.insert(user, function (err, result) {
@@ -34,6 +35,7 @@ MongoClient.connect(url, function (err, db) {
         console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
       }
     });
+    }
    }
    /*//Close connection
    db.close(); */

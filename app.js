@@ -1,59 +1,18 @@
 var express = require('express');
 var mongodb = require('mongodb');
+var router = express.Router();
+var bodyParser = require('body-parser');
+var app = express();
 
-//Monogd Database 
-var mongoClient = mongodb.MongoClient;
-var url = "mongodb://localhost/test";
+var rest = require("./restapi/rest");
 
+app.use(bodyParser.json({limit: '10mb'})); 
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true })); 
 
-mongoClient.connect(url, function(err, db){
-	if(err) {
-		return err;
-	}
-	
-	console.log("Connected successfully!!");
-	db.close();
+app.use(express.static('public'));
+
+app.use("/enquiry", rest);
+
+app.listen(3001, function () {
+	console.log('Example app listening on port 3001!!');
 });
-
-
-function insert() {
-	mongoClient.connect(url, function(err, db) {
-		var mjson = {
-				"_id" : "1",
-				"name" : "sanam teri kasam",
-				"artist": 'mawra'	
-		};
-		
-		db.collection('users').insert(mjson, function(err, result){
-			if(err !== null) {
-				console.log(err);
-			}
-			console.log(result);
-			db.close();
-		});
-	});
-}
-
-insert();
-
-function update() {
-	mongoClient.connect(url, function(err, db) {
-		var qjson = {'_id' : '1'};
-		var ujson = {
-				"$set" : {
-					"awards" : 'oscar'
-				},
-				$currentDate: { "lastModified": true }
-		};
-		
-		db.collection('users').update(qjson, ujson, function(err, result){
-			console.log(err);
-			console.log(result);
-			db.close();
-		});
-	});
-}
-
-
-
-update();

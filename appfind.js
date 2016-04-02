@@ -5,7 +5,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
 // Connection URL. This is where your mongodb server is running.
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://localhost:27017/testdata';
 
 // Use connect method to connect to the Server
 MongoClient.connect(url, function (err, db) {
@@ -19,7 +19,7 @@ MongoClient.connect(url, function (err, db) {
     var collection = db.collection('users');
 
     // Insert some users
-    collection.find({name: 'modulus user'}).toArray(function (err, result) {
+    collection.find({name: 'vipin1'},{ name: 0}).toArray(function (err, result) {
       if (err) {
         console.log(err);
       } else if (result.length) {
