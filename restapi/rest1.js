@@ -7,11 +7,6 @@ var url = 'mongodb://localhost:27017/testdata';
 var firstrestvar = {
 	enquiryMail : function(enquiryJson) {
 
-		console.log("name : "+enquiryJson.name);
-		console.log("name : "+enquiryJson.email);
-		console.log("name : "+enquiryJson.mobile);
-		console.log("name : "+enquiryJson.message);
-		
 		// Use connect method to connect to the Server
 		MongoClient.connect(url, function (err, db) {
 		  if (err) {
